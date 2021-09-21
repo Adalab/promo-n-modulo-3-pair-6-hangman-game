@@ -1,6 +1,27 @@
 import "../styles/main.scss";
+import React, { useState } from "react";
 
 function App() {
+  let [error, setError] = useState(0);
+  let [lastLetter, setLastLetter] = useState("");
+
+  //Funcion numero de errores
+
+  let numberOfErrors = () => {
+    setError(error++);
+  };
+
+  let HandleLastLetter = (ev) => {
+    const inputLastLetter = ev.target.value;
+    let regex = RegExp("^[A-Za-zÑñÁáÉéÍíÓóÚúÜü]$");
+
+    if (regex === inputLastLetter) {
+      setLastLetter(inputLastLetter);
+    } else {
+      setLastLetter("");
+    }
+  };
+
   return (
     <div>
       <div className="page">
@@ -45,10 +66,15 @@ function App() {
                 type="text"
                 name="last-letter"
                 id="last-letter"
+                onChange={HandleLastLetter}
+                value={lastLetter}
               />
+              <button className="btn" onClick={numberOfErrors}>
+                incrementar
+              </button>
             </form>
           </section>
-          <section className="dummy error-5">
+          <section className={`dummy error-${error}`}>
             <span className="error-13 eye"></span>
             <span className="error-12 eye"></span>
             <span className="error-11 line"></span>
