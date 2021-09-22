@@ -7,15 +7,17 @@ function App() {
 
   //Funcion numero de errores
 
-  let numberOfErrors = () => {
+  let numberOfErrors = (ev) => {
+    ev.preventDefault();
     setError(error++);
   };
 
+  //funcion last letter
   let HandleLastLetter = (ev) => {
     const inputLastLetter = ev.target.value;
-    let regex = RegExp("^[A-Za-zÑñÁáÉéÍíÓóÚúÜü]$");
+    let valid = RegExp("^[A-Za-zÑñÁáÉéÍíÓóÚúÜü]$");
 
-    if (regex === inputLastLetter) {
+    if (valid === inputLastLetter) {
       setLastLetter(inputLastLetter);
     } else {
       setLastLetter("");
