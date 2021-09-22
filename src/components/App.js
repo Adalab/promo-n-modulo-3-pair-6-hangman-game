@@ -9,15 +9,14 @@ function App() {
 
   let numberOfErrors = (ev) => {
     ev.preventDefault();
-    setError(error++);
+    let countError = error + 1;
+    setError(countError);
   };
 
   //funcion last letter
   let HandleLastLetter = (ev) => {
     const inputLastLetter = ev.target.value;
-    let valid = RegExp("^[A-Za-zÑñÁáÉéÍíÓóÚúÜü]$");
-
-    if (valid === inputLastLetter) {
+    if (/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü]$/.test(inputLastLetter)) {
       setLastLetter(inputLastLetter);
     } else {
       setLastLetter("");
@@ -68,6 +67,7 @@ function App() {
                 type="text"
                 name="last-letter"
                 id="last-letter"
+                pattern="^[A-Za-zÑñÁáÉéÍíÓóÚúÜü]$"
                 onChange={HandleLastLetter}
                 value={lastLetter}
               />
