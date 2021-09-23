@@ -20,24 +20,26 @@ function App() {
     const inputLastLetter = ev.target.value;
     if (/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü]$/.test(inputLastLetter)) {
       setLastLetter(inputLastLetter);
+      if(!userLetters.includes(inputLastLetter)){
+        setUserLetters([...userLetters,inputLastLetter]);
+      }
     } else {
       setLastLetter("");
     }
-    setUserLetters([...userLetters,inputLastLetter]);
-
+    
   };
 
   let renderSolutionLetters = () =>{
     const wordLetters = word.split('');
       return wordLetters.map((word,index) => {
         if(userLetters.includes(word)){
-          return (<li className="letter" key={index}>{lastLetter}</li>)
+          return (<li className="letter" key={index}>{word}</li>)
         }else{
           return (<li className="letter" key={index}></li>)
         }
-      
       })
   }
+  
   return (
     <div>
       <div className="page">
