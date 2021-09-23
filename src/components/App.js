@@ -3,7 +3,9 @@ import React, { useState } from "react";
 
 function App() {
   let [error, setError] = useState(0);
-  let [lastLetter, setLastLetter] = useState("");
+  let [lastLetter, setLastLetter] = useState([]);
+  let [word, setWord] = useState("katakroker");
+  let [userLetters, setUserLetters] = useState([]);
 
   //Funcion numero de errores
 
@@ -14,15 +16,30 @@ function App() {
   };
 
   //funcion last letter
-  let HandleLastLetter = (ev) => {
+  let handleLastLetter = (ev) => {
     const inputLastLetter = ev.target.value;
     if (/^[A-Za-zÑñÁáÉéÍíÓóÚúÜü]$/.test(inputLastLetter)) {
       setLastLetter(inputLastLetter);
     } else {
       setLastLetter("");
     }
+    setUserLetters([...userLetters, inputLastLetter]);
   };
 
+  let renderSolutionLetters = () => {
+    const wordLetters = word.split("");
+    return wordLetters.map((word, index) => {
+      if (userLetters.includes(word)) {
+        return (
+          <li className="letter" key={index}>
+            {lastLetter}
+          </li>
+        );
+      } else {
+        return <li className="letter" key={index}></li>;
+      }
+    });
+  };
   return (
     <div>
       <div className="page">
@@ -33,18 +50,7 @@ function App() {
           <section>
             <div className="solution">
               <h2 className="title">Solución:</h2>
-              <ul className="letters">
-                <li className="letter">k</li>
-                <li className="letter">a</li>
-                <li className="letter"></li>
-                <li className="letter">a</li>
-                <li className="letter">k</li>
-                <li className="letter">r</li>
-                <li className="letter"></li>
-                <li className="letter">k</li>
-                <li className="letter">e</li>
-                <li className="letter">r</li>
-              </ul>
+              <ul className="letters">{renderSolutionLetters()}</ul>
             </div>
             <div className="feedback">
               <h2 className="title">Letras falladas:</h2>
@@ -67,8 +73,7 @@ function App() {
                 type="text"
                 name="last-letter"
                 id="last-letter"
-                pattern="^[A-Za-zÑñÁáÉéÍíÓóÚúÜü]$"
-                onChange={HandleLastLetter}
+                onChange={handleLastLetter}
                 value={lastLetter}
               />
               <button className="btn" onClick={numberOfErrors}>
