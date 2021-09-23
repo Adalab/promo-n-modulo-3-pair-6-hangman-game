@@ -4,8 +4,8 @@ import React, { useState } from "react";
 function App() {
   let [error, setError] = useState(0);
   let [lastLetter, setLastLetter] = useState([]);
-  let [word, setWord] = useState('katakroker');
-  let [userLetters,setUserLetters] = useState([])
+  let [word, setWord] = useState("katakroker");
+  let [userLetters, setUserLetters] = useState([]);
 
   //Funcion numero de errores
 
@@ -50,9 +50,7 @@ function App() {
           <section>
             <div className="solution">
               <h2 className="title">Solución:</h2>
-              <ul className="letters">
-                {renderSolutionLetters()}
-              </ul>
+              <ul className="letters">{renderSolutionLetters()}</ul>
             </div>
             <div className="feedback">
               <h2 className="title">Letras falladas:</h2>
@@ -65,7 +63,7 @@ function App() {
               </ul>
             </div>
             <form className="form">
-              <label className="title" htmlFor="last-letter"> 
+              <label className="title" htmlFor="last-letter">
                 Escribe una letra:
               </label>
               <input
